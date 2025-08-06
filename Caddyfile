@@ -29,7 +29,7 @@
 
 # site block, listens on the $PORT environment variable, automatically assigned by railway
 :{$PORT} {
-	encode gzip
+	encode zstd
 
 	# access logs
 	log {
