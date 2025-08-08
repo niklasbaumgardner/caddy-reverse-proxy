@@ -31,6 +31,8 @@
 :{$PORT} {
 	# encode zstd
 
+	file_server /static/*
+
 	# access logs
 	log {
 		format json # set access log format to json mode
