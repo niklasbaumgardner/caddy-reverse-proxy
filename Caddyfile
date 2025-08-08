@@ -15,9 +15,7 @@
 	}
 }
 
-handle /static/* {
-  file_server /static/*
-}
+
 
 (lb_settings) {
 	lb_policy round_robin
@@ -33,11 +31,15 @@ handle /static/* {
 	unhealthy_request_count 200
 }
 
-handle {
-  # site block, listens on the $PORT environment variable, automatically assigned by railway
-  :{$PORT} {
-    # encode zstd
+# site block, listens on the $PORT environment variable, automatically assigned by railway
+:{$PORT} {
+	# encode zstd
 
+  handle /static/* {
+    file_server /static/*
+  }
+
+	handle {
     # proxy all requests for /* to the app, configure these variables in the service settings
     reverse_proxy {
       # for private networking replicas are exposed as multiple dns results, use those dns results as the upstreams
