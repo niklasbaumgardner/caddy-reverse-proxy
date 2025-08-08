@@ -15,6 +15,10 @@
 	}
 }
 
+handle /static/* {
+  file_server /static/*
+}
+
 (lb_settings) {
 	lb_policy round_robin
 	lb_retries 100
@@ -30,10 +34,8 @@
 }
 
 # site block, listens on the $PORT environment variable, automatically assigned by railway
-:{$PORT} {
+handle :{$PORT} {
 	# encode zstd
-
-	file_server /static/*
 
 	# proxy all requests for /* to the app, configure these variables in the service settings
 	reverse_proxy {
