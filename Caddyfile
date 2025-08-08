@@ -33,7 +33,7 @@
 :{$PORT} {
 	# encode zstd
 
-  handle /static/* {
+  handle /static* {
     root ./
     file_server
   }
