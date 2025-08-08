@@ -33,28 +33,30 @@ handle /static/* {
 	unhealthy_request_count 200
 }
 
-# site block, listens on the $PORT environment variable, automatically assigned by railway
-handle :{$PORT} {
-	# encode zstd
+handle {
+  # site block, listens on the $PORT environment variable, automatically assigned by railway
+  :{$PORT} {
+    # encode zstd
 
-	# proxy all requests for /* to the app, configure these variables in the service settings
-	reverse_proxy {
-		# for private networking replicas are exposed as multiple dns results, use those dns results as the upstreams
-		dynamic a {
-			name {$APP_DOMAIN}
-			port {$APP_PORT}
-			refresh 1s
-			dial_timeout 30s
-			versions ipv4 ipv6
-		}
+    # proxy all requests for /* to the app, configure these variables in the service settings
+    reverse_proxy {
+      # for private networking replicas are exposed as multiple dns results, use those dns results as the upstreams
+      dynamic a {
+        name {$APP_DOMAIN}
+        port {$APP_PORT}
+        refresh 1s
+        dial_timeout 30s
+        versions ipv4 ipv6
+      }
 
-		# configure load balancing settings
-		import lb_settings
+      # configure load balancing settings
+      import lb_settings
 
-		# configure passive health checks
-		import passive_health_checks
+      # configure passive health checks
+      import passive_health_checks
 
-		# sets the Host header to the header to the dynamic name and port options
-		header_up Host {upstream_hostport}
-	}
+      # sets the Host header to the header to the dynamic name and port options
+      header_up Host {upstream_hostport}
+    }
+  }
 }
