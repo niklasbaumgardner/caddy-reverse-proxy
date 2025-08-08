@@ -36,6 +36,7 @@
 	# access logs
 	log {
 		format json # set access log format to json mode
+		level DEBUG
 	}
 
 	# proxy all requests for /* to the app, configure these variables in the service settings
