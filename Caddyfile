@@ -5,7 +5,8 @@
 	auto_https off # railway handles https for us, this could in some cases cause issues if left enabled
 	# runtime logs
 	log {
-		format json # set runtime log format to json mode
+		output stdout
+		format console
 		level DEBUG
 	}
 	# server options
