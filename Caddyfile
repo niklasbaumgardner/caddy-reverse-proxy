@@ -5,7 +5,8 @@
 	auto_https off # railway handles https for us, this could in some cases cause issues if left enabled
 	# runtime logs
 	log {
-		format json # set runtime log format to json mode 
+		format json # set runtime log format to json mode
+		level DEBUG
 	}
 	# server options
 	servers {
@@ -32,12 +33,6 @@
 	# encode zstd
 
 	file_server /static/*
-
-	# access logs
-	log {
-		format json # set access log format to json mode
-		level DEBUG
-	}
 
 	# proxy all requests for /* to the app, configure these variables in the service settings
 	reverse_proxy {
