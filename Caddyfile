@@ -15,8 +15,6 @@
 	}
 }
 
-
-
 (lb_settings) {
 	lb_policy round_robin
 	lb_retries 100
@@ -36,7 +34,8 @@
 	# encode zstd
 
   handle /static/* {
-    file_server /static/*
+    root ./
+    file_server
   }
 
 	handle {
